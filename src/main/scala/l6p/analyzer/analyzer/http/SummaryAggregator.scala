@@ -59,7 +59,7 @@ class SummaryAggregator extends AggregateFunction[HttpLog, Acc, SummaryData] {
   }
 
   override def getResult(acc: Acc): SummaryData = {
-    val byPercentile = List(95, 90, 75, 50).map(p =>
+    val byPercentile = List(90, 75, 50).map(p =>
       ByPercentileData(p, acc.durations.percentile(p))
     )
 
