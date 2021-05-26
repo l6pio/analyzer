@@ -1,0 +1,41 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: analyzer
+  labels:
+    app: analyzer
+spec:
+  selector:
+    matchLabels:
+      app: analyzer
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: analyzer
+    spec:
+      containers:
+      - name: analyzer
+        image: analyzer:latest
+        imagePullPolicy: Always
+        env:
+          - name: MONGODB_HOST
+            value: "mongodb.l6p.svc.cluster.local:27017"
+          - name: MONGODB_USER
+            value: "root"
+          - name: MONGODB_PASS
+            value: "rootpassword"
+          - name: KAFKA_ENDPOINT
+            value: "kafka.l6p.svc.cluster.local:9092"
+          - name: KAFKA_TOPIC
+            value: "l6p.log"
+        resources:
+          limits:
+            cpu: 0.5
+            memory: 512Mi
+          requests:
+            cpu: 0.5
+            memory: 512Mi
+      serviceAccountName: analyzer
+      terminationGracePeriodSeconds: 10
