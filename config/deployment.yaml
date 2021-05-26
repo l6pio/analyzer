@@ -31,9 +31,6 @@ spec:
           - name: KAFKA_TOPIC
             value: "l6p.log"
         resources:
-          limits:
-            cpu: 0.5
-            memory: 512Mi
           requests:
             cpu: 0.5
             memory: 512Mi
