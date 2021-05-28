@@ -3,21 +3,13 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: analyzer
-  labels:
-    app: analyzer
 spec:
-  selector:
-    matchLabels:
-      app: analyzer
   replicas: 1
   template:
-    metadata:
-      labels:
-        app: analyzer
     spec:
       containers:
       - name: analyzer
-        image: analyzer:latest
+        image: img:latest
         imagePullPolicy: Always
         env:
           - name: MONGODB_HOST
